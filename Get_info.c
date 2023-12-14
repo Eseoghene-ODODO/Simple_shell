@@ -60,15 +60,15 @@ void free_info(info_t *info, int all)
 		{
 			free(info->arg);
 		}
-		else if (info->env)
+		if (info->env)
 		{
 			free_list(&(info->env));
 		}
-		else if (info->history)
+		if (info->history)
 		{
 			free_list(&(info->history));
 		}
-		else if (info->alias)
+		if (info->alias)
 		{
 			free_list(&(info->alias));
 		}
