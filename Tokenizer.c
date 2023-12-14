@@ -7,7 +7,6 @@ char **strtow(char *str, char *d);
  * @d: the delimeter string
  * Return: a pointer to an array of strings, or NULL on failure
  */
-
 char **strtow(char *str, char *d)
 {
 	int i, j, k, m, numwords = 0;
@@ -21,6 +20,7 @@ char **strtow(char *str, char *d)
 	{
 		d = " ";
 	}
+
 	for (i = 0; str[i] != '\0'; i++)
 	{
 		if (!is_delim(str[i], d) && (is_delim(str[i + 1], d) || !str[i + 1]))
@@ -32,11 +32,12 @@ char **strtow(char *str, char *d)
 	{
 		return (NULL);
 	}
-	s = malloc((1 + numwords) * sizeof(char *));
-	if (!s)
+	s = malloc((numwords + 1) * sizeof(char *));
+	if (s == NULL)
 	{
 		return (NULL);
 	}
+
 	for (i = 0, j = 0; j < numwords; j++)
 	{
 		while (is_delim(str[i], d))
@@ -49,7 +50,7 @@ char **strtow(char *str, char *d)
 			k++;
 		}
 		s[j] = malloc((k + 1) * sizeof(char));
-		if (!s[j])
+		if (s[j] == NULL)
 		{
 			for (k = 0; k < j; k++)
 			{
@@ -64,6 +65,7 @@ char **strtow(char *str, char *d)
 		}
 		s[j][m] = 0;
 	}
+
 	s[j] = NULL;
 	return (s);
 }
@@ -84,26 +86,29 @@ char **strtow2(char *str, char d)
 	{
 		return (NULL);
 	}
+
 	for (i = 0; str[i] != '\0'; i++)
 	{
 		if ((str[i] != d && str[i + 1] == d) ||
-		    (str[i] != d && !str[i + 1]) || str[i + 1] == d)
+				(str[i] != d && !str[i + 1]) || str[i + 1] == d)
 		{
 			numwords++;
 		}
 	}
+
 	if (numwords == 0)
 	{
 		return (NULL);
 	}
-	s = malloc((1 + numwords) * sizeof(char *));
-	if (!s)
+	s = malloc((numwords + 1) * sizeof(char *));
+	if (s == NULL)
 	{
 		return (NULL);
 	}
+
 	for (i = 0, j = 0; j < numwords; j++)
 	{
-		while (str[i] == d && str[i] != d)
+		while (str[i] == d && str[i])
 		{
 			i++;
 		}
@@ -113,7 +118,7 @@ char **strtow2(char *str, char d)
 			k++;
 		}
 		s[j] = malloc((k + 1) * sizeof(char));
-		if (!s[j])
+		if (s[j] == NULL)
 		{
 			for (k = 0; k < j; k++)
 			{
@@ -128,6 +133,7 @@ char **strtow2(char *str, char d)
 		}
 		s[j][m] = 0;
 	}
+
 	s[j] = NULL;
 	return (s);
 }

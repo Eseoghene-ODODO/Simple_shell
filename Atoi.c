@@ -14,14 +14,19 @@ int interactive(info_t *info)
 /**
  * is_delim - checks if character is a delimeter
  * @c: the char to check
- * @delim: the delimeter string
+ * @*d: the delimeter string
  * Return: 1 if true, 0 if false
  */
-int is_delim(char c, char *delim)
+int is_delim(char c, char *d)
 {
-	while (*delim)
-		if (*delim++ == c)
+	while (*d)
+	{
+		if (*d == c)
+		{
 			return (1);
+		}
+		d++;
+	}
 	return (0);
 }
 
@@ -34,9 +39,13 @@ int is_delim(char c, char *delim)
 int _isalpha(int c)
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+	{
 		return (1);
+	}
 	else
+	{
 		return (0);
+	}
 }
 
 /**
@@ -53,8 +62,9 @@ int _atoi(char *s)
 	for (i = 0;  s[i] != '\0' && flag != 2; i++)
 	{
 		if (s[i] == '-')
+		{
 			sign *= -1;
-
+		}
 		if (s[i] >= '0' && s[i] <= '9')
 		{
 			flag = 1;
@@ -62,13 +72,18 @@ int _atoi(char *s)
 			result += (s[i] - '0');
 		}
 		else if (flag == 1)
+		{
 			flag = 2;
+		}
 	}
 
 	if (sign == -1)
+	{
 		output = -result;
+	}
 	else
+	{
 		output = result;
-
+	}
 	return (output);
 }
